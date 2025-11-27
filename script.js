@@ -12,13 +12,17 @@ let count = 10;
 let timer = null;
 
 startBtn.addEventListener("click", function(){
+  if (timer) {
+    clearInterval(timer)
+  }    
+  pauseBtn.disabled = false;  
   let secondsValues = parseInt(secondsInputEl.value);
   let minsValues = parseInt(minutesInputEl.value);
   let totalSeconds = (minsValues * 60) + secondsValues;
   console.log(totalSeconds);
   
   
-  timer = setInterval(() => {   
+  timer = setInterval(() => { 
     let mins = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;    
 
@@ -35,11 +39,25 @@ startBtn.addEventListener("click", function(){
         mins--
       }else{
         clearInterval(timer)
-        messageEl.textContent = "Time is Up"
+        messageEl.classList.add("show")
       }
     }
   }, 1000);
 })
-console.log(timer);
 
+pauseBtn.addEventListener("click", function(){
+  clearInterval(timer)
+  startBtn.disabled = false;
+  pauseBtn.disabled = true;
+})
 
+resetBtn.addEventListener("click", function(){
+  minutesInputEl.value = 0;
+  secondsInputEl.value = 0;
+
+  displayTimer.textContent = "00:00"
+  clearInterval(timer)
+
+  startBtn.disabled = false;
+  pauseBtnBtn.disabled = true;
+})

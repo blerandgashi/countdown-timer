@@ -10,6 +10,12 @@ body{
   align-items: center;
   background-color: aliceblue;
 }
+.message{
+  display: none;
+}
+.show{
+  display: block
+}
 .container{
   background-color: white;
   padding: 40px;
